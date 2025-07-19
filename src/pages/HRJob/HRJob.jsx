@@ -102,7 +102,7 @@ export default function HRJob() {
 
       {/* Search bar */}
       <div className="flex flex-col p-4 gap-4 bg-white rounded-lg">
-        <p className="text-lg font-medium">Applicant Management</p>
+        <p className="text-lg font-medium">Applicant List</p>
         <Table dataSource={dataSource} columns={columns} />
       </div>
       {/* Search bar */}
