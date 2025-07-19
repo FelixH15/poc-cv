@@ -1,11 +1,11 @@
 import "./UserJob.css";
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import company from "../../assets/company.png";
-import companyBlack from "../../assets/company-black.png";
 import location from "../../assets/location.png";
 import time from "../../assets/time.png";
+import companyBlack from "../../assets/company-black.png";
 import group from "../../assets/group.png";
 import upload from "../../assets/upload.png";
 import date from "../../assets/date.png";
@@ -14,21 +14,6 @@ import check from "../../assets/check.png";
 export default function UserJob() {
   const fileInputRef = useRef(null);
   const [message, setMessage] = useState("");
-  useEffect(() => {
-    async function fetchData() {
-      console.log("Fetching data from n8n webhook...");
-      try {
-        const response = await axios.get(
-          "https://hrai-be.onrender.com/applicants"
-        );
-        console.log(response);
-      } catch (error) {
-        console.error("Error getting file :", error);
-      }
-    }
-
-    fetchData();
-  }, []);
 
   async function handleFileChange(event) {
     console.log("File selected:", event.target.files[0]);

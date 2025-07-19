@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import UserJob from "./pages/UserJob/UserJob";
 import job from "./assets/job.png";
 import notification from "./assets/notification.png";
 import user from "./assets/user.png";
+import { Suspense, lazy } from "react";
 
 function App() {
+  const UserJob = lazy(() => import("./pages/UserJob/UserJob"));
+  const HRJob = lazy(() => import("./pages/HRJob/HRJob"));
   return (
     <div style={{ backgroundColor: "#F9FAFB" }} className="h-screen">
       {/* Headers */}
@@ -25,9 +27,17 @@ function App() {
       </header>
       {/* Headers */}
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<UserJob />} />
-        </Routes>
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center">Loading...</div>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<UserJob />} />
+            <Route path="/userJob" element={<UserJob />} />
+            <Route path="/hrJob" element={<HRJob />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </div>
   );
