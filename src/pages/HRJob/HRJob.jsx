@@ -1,10 +1,46 @@
 import company from "../../assets/company.png";
 import location from "../../assets/location.png";
 import time from "../../assets/time.png";
-import { useEffect } from "react";
+import { Table } from "antd";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function HRJob() {
+  const [dataSource, setDataSource] = useState([]);
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Average Percentage",
+      dataIndex: "average_percentage",
+      key: "average_percentage",
+    },
+    {
+      title: "Technical Percentage",
+      dataIndex: "percentage_technical",
+      key: "percentage_technical",
+    },
+    {
+      title: "Technical Reason",
+      dataIndex: "reason_technical",
+      key: "reason_technical",
+    },
+    {
+      title: "Personality Percentage",
+      dataIndex: "percentage_personality",
+      key: "percentage_personality",
+    },
+    {
+      title: "Personality Reason",
+      dataIndex: "reason_personality",
+      key: "reason_personality",
+    },
+  ];
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -12,6 +48,7 @@ export default function HRJob() {
           "https://hrai-be.onrender.com/applicants"
         );
         console.log(response);
+        setDataSource(response.data);
       } catch (error) {
         console.error("Error getting file :", error);
       }
@@ -66,6 +103,7 @@ export default function HRJob() {
       {/* Search bar */}
       <div className="flex flex-col p-4 gap-4 bg-white rounded-lg">
         <p className="text-lg font-medium">Applicant Management</p>
+        <Table dataSource={dataSource} columns={columns} />
       </div>
       {/* Search bar */}
     </div>
